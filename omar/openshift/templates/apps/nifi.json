@@ -2,10 +2,10 @@
   "apiVersion": "v1",
   "kind": "Template",
   "metadata": {
-    "name": "omar-openshift-template"
+    "name": "nifi-app"
   },
   "labels": {
-    "template": "omar-openshift-template"
+    "template": "nifi-app"
   },
   "parameters": [
     {
