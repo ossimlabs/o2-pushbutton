@@ -181,12 +181,7 @@
             "securityContext": {},
             "terminationGracePeriodSeconds": 30,
             "volumes": [
-              {
-                "name": "volume-nifi",
-                "persistentVolumeClaim": {
-                  "claimName": "${OSSIM_DATA_PV_NAME}-pvc"
-                }
-              }
+              
             ]
           }
         },
