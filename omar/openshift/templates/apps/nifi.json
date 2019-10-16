@@ -23,7 +23,7 @@
     {
       "name": "DEPLOYMENT_TARGET",
       "displayName": "DEPLOYMENT_TARGET",
-      "description": "Deployment target (dev|stage|blue|green)",
+      "description": "Openshift project to which you will deploy",
       "required": true,
       "value": "dev"
     },
