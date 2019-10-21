@@ -12,7 +12,7 @@
       "description": "",
       "displayName": "",
       "name": "DOCKER_IMAGE_REPO",
-      "value": "quay.io/radiantsolutions"
+      "value": "apache/nifi"
     },
     {
       "description": "",
