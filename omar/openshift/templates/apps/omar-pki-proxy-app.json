@@ -153,7 +153,7 @@
                 "resources": {
                   "requests": {
                     "memory": "${MEMORY_MIN}"
-                  }
+                  },
                   "limits": {
                     "memory": "${MEMORY_MAX}"
                   }
