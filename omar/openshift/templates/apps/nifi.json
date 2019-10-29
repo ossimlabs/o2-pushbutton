@@ -12,7 +12,7 @@
       "description": "",
       "displayName": "",
       "name": "DOCKER_IMAGE_REPO",
-      "value": "apache/nifi"
+      "value": "apache"
     },
     {
       "description": "",
