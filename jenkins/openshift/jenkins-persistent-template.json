@@ -424,6 +424,12 @@
       "displayName": "Fatal Error Log File",
       "name": "ENABLE_FATAL_ERROR_LOG_FILE",
       "value": "false"
+    },
+    {
+        "description": "Jenkins Home Directory location.",
+        "displayName": "Jenkins Home Directory",
+        "name": "JENKINS_HOME",
+        "value": "/var/lib/jenkins"
     }
   ]
 }
