@@ -110,9 +110,9 @@
         "capacity": {
           "storage": "${VOLUME_CAPACITY}"
         },
-        "nfs": {
-          "path": "${NFS_MOUNT_PATH}",
-          "server": "${NFS_SERVER}"
+        "awsElasticBlockStore": {
+          "fsType": "ext4",
+          "volumeID": "${EBS_VOLUME_ID}"
         },
         "persistentVolumeReclaimPolicy": "Retain"
       },
@@ -318,18 +318,10 @@
       "value": "100Gi"
     },
     {
-      "description": "The mount point on the NFS",
-      "displayName": "NFS Mount Path",
-      "name": "NFS_MOUNT_PATH",
+      "description": "The EBS volume ID",
+      "displayName": "EBS Volume ID",
+      "name": "EBS_VOLUME_ID",
       "required": true,
-      "value": "/mnt/nexus-data"
-    },
-    {
-      "description": "The location of the NFS server (e.g. o2-nfs.private.ossim.io)",
-      "displayName": "NFS Server",
-      "name": "NFS_SERVER",
-      "required": true,
-      "value": "o2-nfs.private.ossim.io"
     },
     {
       "description": "The OpenShift Namespace where the Nexus ImageStream resides.",
