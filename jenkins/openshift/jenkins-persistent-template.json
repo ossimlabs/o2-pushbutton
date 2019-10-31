@@ -155,6 +155,10 @@
                   {
                     "name": "ENABLE_FATAL_ERROR_LOG_FILE",
                     "value": "${ENABLE_FATAL_ERROR_LOG_FILE}"
+                  },
+                  {
+                    "name": "JENKINS_HOME",
+                    "value": "${JENKINS_HOME}"
                   }
                 ],
                 "image": " ",
