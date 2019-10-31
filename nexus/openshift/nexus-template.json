@@ -206,8 +206,8 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_STREAM_TAG}",
-                "namespace": "devops"
+                "name": "${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_TAG}",
+                "namespace": "${NAMESPACE}"
               },
               "lastTriggeredImage": ""
             },
@@ -271,12 +271,12 @@
             "annotations": null,
             "from": {
               "kind": "DockerImage",
-              "name": "${NAMESPACE}/${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_STREAM_TAG}"
+              "name": "${DOCKER_REGISTRY}/${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_TAG}"
             },
             "importPolicy": {
               "scheduled": true
             },
-            "name": "${NEXUS_IMAGE_STREAM_TAG}",
+            "name": "${NEXUS_IMAGE_TAG}",
             "referencePolicy": {
               "type": "Source"
             }
@@ -327,6 +327,12 @@
       "description": "The OpenShift Namespace where the Nexus ImageStream resides.",
       "displayName": "Nexus ImageStream Namespace",
       "name": "NAMESPACE",
+      "value": "devops"
+    },
+    {
+      "description": "The Docker Registry the ImageStream will pull from.",
+      "displayName": "Nexus ImageStream Namespace",
+      "name": "DOCKER_REGISTRY",
       "value": "quay.io/radiantsolutions"
     },
     {
@@ -348,9 +354,9 @@
       "value": "nexus3"
     },
     {
-      "description": "Name of the ImageStreamTag to be used for the Nexus image.",
-      "displayName": "Nexus ImageStreamTag",
-      "name": "NEXUS_IMAGE_STREAM_TAG",
+      "description": "Tag of the Image to be used for the Nexus image.",
+      "displayName": "Nexus Image Tag",
+      "name": "NEXUS_IMAGE_TAG",
       "value": "latest"
     }
   ]

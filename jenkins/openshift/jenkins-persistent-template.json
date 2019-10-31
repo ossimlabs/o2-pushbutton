@@ -218,7 +218,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "${JENKINS_IMAGE_STREAM_TAG}",
+                "name": "${JENKINS_IMAGE_NAME}:${JENKINS_IMAGE_TAG}",
                 "namespace": "${NAMESPACE}"
               },
               "lastTriggeredImage": ""
@@ -307,6 +307,38 @@
         "sessionAffinity": "None",
         "type": "ClusterIP"
       }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "name": "jenkins",
+        "labels": {
+        },
+        "annotations": {
+        }
+      },
+      "spec": {
+        "lookupPolicy": {
+          "local": false
+        },
+        "tags": [
+          {
+            "annotations": null,
+            "from": {
+              "kind": "DockerImage",
+              "name": "${DOCKER_REGISTRY}/${JENKINS_IMAGE_NAME}:${JENKINS_IMAGE_TAG}"
+            },
+            "importPolicy": {
+              "scheduled": true
+            },
+            "name": "${JENKINS_IMAGE_TAG}",
+            "referencePolicy": {
+              "type": "Source"
+            }
+          }
+        ]
+      }
     }
   ],
   "parameters": [
@@ -357,7 +389,7 @@
       "description": "The OpenShift Namespace where the Jenkins ImageStream resides.",
       "displayName": "Jenkins ImageStream Namespace",
       "name": "NAMESPACE",
-      "value": "openshift"
+      "value": "devops"
     },
     {
       "description": "Whether to perform memory intensive, possibly slow, synchronization with the Jenkins Update Center on start.  If true, the Jenkins core update monitor and site warnings monitor are disabled.",
@@ -366,10 +398,22 @@
       "value": "false"
     },
     {
-      "description": "Name of the ImageStreamTag to be used for the Jenkins image.",
-      "displayName": "Jenkins ImageStreamTag",
-      "name": "JENKINS_IMAGE_STREAM_TAG",
-      "value": "jenkins:2"
+      "description": "The OpenShift Namespace where the Jenkins ImageStream resides.",
+      "displayName": "Jenkins ImageStream",
+      "name": "DOCKER_REGISTRY",
+      "value": "jenkins"
+    },
+    {
+      "description": "Name of the Image to be used for the Jenkins image.",
+      "displayName": "Jenkins Image Name",
+      "name": "JENKINS_IMAGE_NAME",
+      "value": "jenkins"
+    },
+    {
+      "description": "Tag of the Image to be used for the Jenkins image.",
+      "displayName": "Jenkins Image Tag",
+      "name": "JENKINS_IMAGE_TAG",
+      "value": "lts"
     },
     {
       "description": "When a fatal error occurs, an error log is created with information and the state obtained at the time of the fatal error.",
