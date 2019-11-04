@@ -160,7 +160,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-ui/health",
+                    "path": "/omar-ui/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
