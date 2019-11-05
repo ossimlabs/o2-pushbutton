@@ -163,7 +163,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-wms/health",
+                    "path": "/omar-wms/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
