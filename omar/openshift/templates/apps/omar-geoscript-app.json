@@ -182,7 +182,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-geoscript/health",
+                    "path": "/omar-geoscript/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
