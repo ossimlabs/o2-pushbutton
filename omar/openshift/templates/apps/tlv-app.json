@@ -163,7 +163,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/tlv/health",
+                    "path": "/tlv/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
