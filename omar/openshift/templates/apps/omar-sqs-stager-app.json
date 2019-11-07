@@ -171,7 +171,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-sqs-stager/health",
+                    "path": "/omar-sqs-stager/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
