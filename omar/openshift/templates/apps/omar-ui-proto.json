@@ -69,6 +69,12 @@
       "value": ""
     },
     {
+      "name": "MEMORY_MIN",
+      "displayName": "MEMORY_MIN",
+      "description": "Minimum memory for this app to have",
+      "value": "500Mi"
+    },
+    {
       "name": "MEMORY_MAX",
       "displayName": "MEMORY_MAX",
       "description": "Maximum memory for this app to have",
@@ -139,7 +145,7 @@
                 "imagePullPolicy": "Always",
                 "livenessProbe": {
                   "failureThreshold": 5,
-                  "initialDelaySeconds": 30,
+                  "initialDelaySeconds": 5,
                   "periodSeconds": 15,
                   "successThreshold": 1,
                   "tcpSocket": {
@@ -157,18 +163,18 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-ui-proto/health",
+                    "path": "/omar-ui-proto",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
-                  "initialDelaySeconds": 30,
+                  "initialDelaySeconds": 5,
                   "periodSeconds": 15,
                   "successThreshold": 1,
                   "timeoutSeconds": 3
                 },
                 "resources": {
                   "requests": {
-                    "memory": "${MEMORY_MAX}"
+                    "memory": "${MEMORY_MIN}"
                   },
                   "limits": {
                     "memory": "${MEMORY_MAX}"

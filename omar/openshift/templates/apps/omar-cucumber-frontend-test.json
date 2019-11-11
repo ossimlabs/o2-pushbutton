@@ -18,7 +18,7 @@
       "description": "",
       "displayName": "",
       "name": "APP_NAME",
-      "value": "ossim-isa-service"
+      "value": "omar-cucumber-frontend-test"
     },
     {
       "name": "DEPLOYMENT_TARGET",
@@ -40,13 +40,6 @@
       "description": "Docker Container Image Version Tag",
       "required": true,
       "value": "latest"
-    },
-    {
-      "name": "OSSIM_DATA_PV_NAME",
-      "displayName": "OSSIM_DATA_PV_NAME",
-      "description": "Persistent volume storage base name",
-      "required": true,
-      "value": "ossim-data"
     },
     {
       "name": "REPLICAS",
@@ -90,23 +83,20 @@
   "objects": [
     {
       "apiVersion": "v1",
-      "waitForReady": false,
       "kind": "DeploymentConfig",
       "metadata": {
         "annotations": {
           "openshift.io/generated-by": "OpenShiftNewApp"
         },
-        "creationTimestamp": null,
-        "generation": 350,
         "labels": {
         },
-        "name": "ossim-isa-service",
+        "name": "${APP_NAME}",
         "namespace": "${DEPLOYMENT_TARGET}"
       },
       "spec": {
         "replicas": "${REPLICAS}",
         "selector": {
-          "deploymentconfig": "ossim-isa-service"
+          "deploymentconfig": "${APP_NAME}"
         },
         "strategy": {
           "resources": {},
@@ -126,7 +116,7 @@
             },
             "creationTimestamp": null,
             "labels": {
-              "deploymentconfig": "ossim-isa-service"
+              "deploymentconfig": "${APP_NAME}"
             }
           },
           "spec": {
@@ -134,49 +124,30 @@
               {
                 "env": [
                   {
-                    "name": "SPRING_CLOUD_CONFIG_LABEL",
-                    "value": "master"
-                  },
-                  {
-                    "name": "BUCKETS",
-                    "value": "o2-test-data"
-                  },
-                  {
                     "name": "JAVA_OPTS",
                     "value": "${JAVA_OPTS}"
                   }
                 ],
-                "image": "${OPENSHIFT_DOCKER_REGISTRY_URL}/${DEPLOYMENT_TARGET}/ossim-isa-service:${TAG}",
+                "image": "${OPENSHIFT_DOCKER_REGISTRY_URL}/${DEPLOYMENT_TARGET}/${APP_NAME}:${TAG}",
                 "imagePullPolicy": "Always",
                 "livenessProbe": {
                   "failureThreshold": 5,
-                  "initialDelaySeconds": 30,
+                  "initialDelaySeconds": 20,
                   "periodSeconds": 15,
                   "successThreshold": 1,
-                  "tcpSocket": {
+                  "httpGet": {
+                    "path": "/frontend-test/",
                     "port": 8080
                   },
                   "timeoutSeconds": 3
                 },
-                "name": "ossim-isa-service",
+                "name": "${APP_NAME}",
                 "ports": [
                   {
                     "containerPort": 8080,
                     "protocol": "TCP"
                   }
                 ],
-                "readinessProbe": {
-                  "failureThreshold": 15,
-                  "httpGet": {
-                    "path": "/ossim-isa/health",
-                    "port": 8080,
-                    "scheme": "HTTP"
-                  },
-                  "initialDelaySeconds": 30,
-                  "periodSeconds": 15,
-                  "successThreshold": 1,
-                  "timeoutSeconds": 3
-                },
                 "resources": {
                   "requests": {
                     "memory": "${MEMORY_MIN}"
@@ -185,36 +156,13 @@
                     "memory": "${MEMORY_MAX}"
                   }
                 },
-                "securityContext": {
-                  "capabilities": {
-                    "add": [
-                      "SYS_ADMIN"
-                    ]
-                  },
-                  "privileged": true,
-                  "runAsUser": 1001
-                },
-                "terminationMessagePath": "/dev/termination-log",
-                "volumeMounts": [
-                  {
-                    "mountPath": "/data",
-                    "name": "volume-ossim-isa"
-                  }
-                ]
+                "terminationMessagePath": "/dev/termination-log"
               }
             ],
             "dnsPolicy": "ClusterFirst",
             "restartPolicy": "Always",
             "securityContext": {},
-            "terminationGracePeriodSeconds": 30,
-            "volumes": [
-              {
-                "name": "volume-ossim-isa",
-                "persistentVolumeClaim": {
-                  "claimName": "${OSSIM_DATA_PV_NAME}-pvc"
-                }
-              }
-            ]
+            "terminationGracePeriodSeconds": 30
           }
         },
         "test": false,
@@ -223,11 +171,11 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "ossim-isa-service"
+                "${APP_NAME}"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "ossim-isa-service:${TAG}",
+                "name": "${APP_NAME}:${TAG}",
                 "namespace": "${DEPLOYMENT_TARGET}"
               }
             },
@@ -249,7 +197,7 @@
         "creationTimestamp": null,
         "labels": {
         },
-        "name": "ossim-isa-service",
+        "name": "${APP_NAME}",
         "namespace": "${DEPLOYMENT_TARGET}"
       },
       "spec": {
@@ -262,7 +210,7 @@
           }
         ],
         "selector": {
-          "deploymentconfig": "ossim-isa-service"
+          "deploymentconfig": "${APP_NAME}"
         },
         "sessionAffinity": "None",
         "type": "ClusterIP"
@@ -272,7 +220,7 @@
       "apiVersion": "v1",
       "kind": "ImageStream",
       "metadata": {
-        "name": "ossim-isa-service",
+        "name": "${APP_NAME}",
         "namespace": "${DEPLOYMENT_TARGET}",
         "labels": {
           "application": "test"

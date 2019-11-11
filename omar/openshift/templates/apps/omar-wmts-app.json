@@ -62,6 +62,12 @@
       "value": "false"
     },
     {
+      "name": "MEMORY_MIN",
+      "displayName": "MEMORY_MIN",
+      "description": "Minimum memory for this app to have",
+      "value": "500Mi"
+    },
+    {
       "name": "MEMORY_MAX",
       "displayName": "MEMORY_MAX",
       "description": "Maximum memory for this app to have",
@@ -150,7 +156,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-wmts/health",
+                    "path": "/omar-wmts/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
@@ -161,7 +167,7 @@
                 },
                 "resources": {
                   "requests": {
-                    "memory": "${MEMORY_MAX}"
+                    "memory": "${MEMORY_MIN}"
                   },
                   "limits": {
                     "memory": "${MEMORY_MAX}"

@@ -88,9 +88,9 @@
         "capacity": {
           "storage": "${VOLUME_CAPACITY}"
         },
-        "nfs": {
-          "path": "${NFS_MOUNT_PATH}",
-          "server": "${NFS_SERVER}"
+        "awsElasticBlockStore": {
+          "fsType": "ext4",
+          "volumeID": "${EBS_VOLUME_ID}"
         },
         "persistentVolumeReclaimPolicy": "Retain"
       },
@@ -155,6 +155,10 @@
                   {
                     "name": "ENABLE_FATAL_ERROR_LOG_FILE",
                     "value": "${ENABLE_FATAL_ERROR_LOG_FILE}"
+                  },
+                  {
+                    "name": "JENKINS_HOME",
+                    "value": "${JENKINS_HOME}"
                   }
                 ],
                 "image": " ",
@@ -218,7 +222,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "${JENKINS_IMAGE_STREAM_TAG}",
+                "name": "${JENKINS_IMAGE_NAME}:${JENKINS_IMAGE_TAG}",
                 "namespace": "${NAMESPACE}"
               },
               "lastTriggeredImage": ""
@@ -307,6 +311,38 @@
         "sessionAffinity": "None",
         "type": "ClusterIP"
       }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "name": "jenkins",
+        "labels": {
+        },
+        "annotations": {
+        }
+      },
+      "spec": {
+        "lookupPolicy": {
+          "local": false
+        },
+        "tags": [
+          {
+            "annotations": null,
+            "from": {
+              "kind": "DockerImage",
+              "name": "${DOCKER_REGISTRY}/${JENKINS_IMAGE_NAME}:${JENKINS_IMAGE_TAG}"
+            },
+            "importPolicy": {
+              "scheduled": true
+            },
+            "name": "${JENKINS_IMAGE_TAG}",
+            "referencePolicy": {
+              "type": "Source"
+            }
+          }
+        ]
+      }
     }
   ],
   "parameters": [
@@ -348,24 +384,16 @@
       "value": "50Gi"
     },
     {
-      "description": "The mount point on the NFS",
-      "displayName": "NFS Mount Path",
-      "name": "NFS_MOUNT_PATH",
+      "description": "The EBS volume ID",
+      "displayName": "EBS Volume ID",
+      "name": "EBS_VOLUME_ID",
       "required": true,
-      "value": "/mnt/jenkins-data"
-    },
-    {
-      "description": "The location of the NFS server (e.g. o2-nfs.private.ossim.io)",
-      "displayName": "NFS Server",
-      "name": "NFS_SERVER",
-      "required": true,
-      "value": "o2-nfs.private.ossim.io"
     },
     {
       "description": "The OpenShift Namespace where the Jenkins ImageStream resides.",
       "displayName": "Jenkins ImageStream Namespace",
       "name": "NAMESPACE",
-      "value": "openshift"
+      "value": "devops"
     },
     {
       "description": "Whether to perform memory intensive, possibly slow, synchronization with the Jenkins Update Center on start.  If true, the Jenkins core update monitor and site warnings monitor are disabled.",
@@ -374,16 +402,34 @@
       "value": "false"
     },
     {
-      "description": "Name of the ImageStreamTag to be used for the Jenkins image.",
-      "displayName": "Jenkins ImageStreamTag",
-      "name": "JENKINS_IMAGE_STREAM_TAG",
-      "value": "jenkins:2"
+      "description": "The OpenShift Namespace where the Jenkins ImageStream resides.",
+      "displayName": "Jenkins ImageStream",
+      "name": "DOCKER_REGISTRY",
+      "value": "jenkins"
+    },
+    {
+      "description": "Name of the Image to be used for the Jenkins image.",
+      "displayName": "Jenkins Image Name",
+      "name": "JENKINS_IMAGE_NAME",
+      "value": "jenkins"
+    },
+    {
+      "description": "Tag of the Image to be used for the Jenkins image.",
+      "displayName": "Jenkins Image Tag",
+      "name": "JENKINS_IMAGE_TAG",
+      "value": "lts"
     },
     {
       "description": "When a fatal error occurs, an error log is created with information and the state obtained at the time of the fatal error.",
       "displayName": "Fatal Error Log File",
       "name": "ENABLE_FATAL_ERROR_LOG_FILE",
       "value": "false"
+    },
+    {
+        "description": "Jenkins Home Directory location.",
+        "displayName": "Jenkins Home Directory",
+        "name": "JENKINS_HOME",
+        "value": "/var/lib/jenkins"
     }
   ]
 }

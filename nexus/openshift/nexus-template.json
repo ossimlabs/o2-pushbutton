@@ -110,9 +110,9 @@
         "capacity": {
           "storage": "${VOLUME_CAPACITY}"
         },
-        "nfs": {
-          "path": "${NFS_MOUNT_PATH}",
-          "server": "${NFS_SERVER}"
+        "awsElasticBlockStore": {
+          "fsType": "ext4",
+          "volumeID": "${EBS_VOLUME_ID}"
         },
         "persistentVolumeReclaimPolicy": "Retain"
       },
@@ -206,8 +206,8 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_STREAM_TAG}",
-                "namespace": "devops"
+                "name": "${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_TAG}",
+                "namespace": "${NAMESPACE}"
               },
               "lastTriggeredImage": ""
             },
@@ -256,7 +256,7 @@
       "apiVersion": "v1",
       "kind": "ImageStream",
       "metadata": {
-        "name": "nexus",
+        "name": "${NEXUS_IMAGE_NAME}",
         "labels": {
         },
         "annotations": {
@@ -271,12 +271,12 @@
             "annotations": null,
             "from": {
               "kind": "DockerImage",
-              "name": "${NAMESPACE}/${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_STREAM_TAG}"
+              "name": "${DOCKER_REGISTRY}/${NEXUS_IMAGE_NAME}:${NEXUS_IMAGE_TAG}"
             },
             "importPolicy": {
               "scheduled": true
             },
-            "name": "${NEXUS_IMAGE_STREAM_TAG}",
+            "name": "${NEXUS_IMAGE_TAG}",
             "referencePolicy": {
               "type": "Source"
             }
@@ -318,23 +318,21 @@
       "value": "100Gi"
     },
     {
-      "description": "The mount point on the NFS",
-      "displayName": "NFS Mount Path",
-      "name": "NFS_MOUNT_PATH",
+      "description": "The EBS volume ID",
+      "displayName": "EBS Volume ID",
+      "name": "EBS_VOLUME_ID",
       "required": true,
-      "value": "/mnt/nexus-data"
-    },
-    {
-      "description": "The location of the NFS server (e.g. o2-nfs.private.ossim.io)",
-      "displayName": "NFS Server",
-      "name": "NFS_SERVER",
-      "required": true,
-      "value": "o2-nfs.private.ossim.io"
     },
     {
       "description": "The OpenShift Namespace where the Nexus ImageStream resides.",
       "displayName": "Nexus ImageStream Namespace",
       "name": "NAMESPACE",
+      "value": "devops"
+    },
+    {
+      "description": "The Docker Registry the ImageStream will pull from.",
+      "displayName": "Nexus ImageStream Namespace",
+      "name": "DOCKER_REGISTRY",
       "value": "quay.io/radiantsolutions"
     },
     {
@@ -356,9 +354,9 @@
       "value": "nexus3"
     },
     {
-      "description": "Name of the ImageStreamTag to be used for the Nexus image.",
-      "displayName": "Nexus ImageStreamTag",
-      "name": "NEXUS_IMAGE_STREAM_TAG",
+      "description": "Tag of the Image to be used for the Nexus image.",
+      "displayName": "Nexus Image Tag",
+      "name": "NEXUS_IMAGE_TAG",
       "value": "latest"
     }
   ]

@@ -69,6 +69,12 @@
       "value": "false"
     },
     {
+      "name": "MEMORY_MIN",
+      "displayName": "MEMORY_MIN",
+      "description": "Minimum memory for this app to have",
+      "value": "500Mi"
+    },
+    {
       "name": "MEMORY_MAX",
       "displayName": "MEMORY_MAX",
       "description": "Maximum memory for this app to have",
@@ -155,7 +161,7 @@
                 ],
                 "resources": {
                   "requests": {
-                    "memory": "${MEMORY_MAX}"
+                    "memory": "${MEMORY_MIN}"
                   },
                   "limits": {
                     "memory": "${MEMORY_MAX}"

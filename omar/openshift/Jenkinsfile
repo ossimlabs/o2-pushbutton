@@ -17,7 +17,7 @@ properties([
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20')),
         disableConcurrentBuilds()
 ])
-
+timeout(time: 30, unit: 'MINUTES') {
 node ("${BUILD_NODE}"){
     stage("Checkout O2-Pushbutton"){
         dir("o2-pushbutton"){
@@ -134,4 +134,5 @@ node ("${BUILD_NODE}"){
                 step([$class: 'WsCleanup'])
         }
     }
+}
 }
