@@ -1,0 +1,90 @@
+apiVersion: v1
+data:
+  nifi-start.sh: |
+    #!/bin/bash
+    export HOSTNAME=${HOSTNAME}.nifi
+    /opt/nifi/scripts/start.sh
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2019-11-02T14:17:37Z'
+  name: nifi-start-script
+  namespace: omar-dev
+  resourceVersion: '735317'
+  selfLink: /api/v1/namespaces/omar-dev/configmaps/nifi-start-script
+  uid: 85be9da4-fd7b-11e9-a4f8-02f61b17a861
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nifi
+  labels:
+    app: nifi
+spec:
+  ports:
+    - port: 8080
+      name: web
+  clusterIP: None
+  selector:
+    app: nifi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: nifi
+  name: nifi-set
+spec:
+  serviceName: nifi
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nifi
+  template:
+    metadata:
+      labels:
+        app: nifi
+    spec:
+      volumes:
+        - name: volume-nifi
+          persistentVolumeClaim:
+            claimName: ossim-data-dev-pvc
+        - name: start-script
+          configMap:
+            name: nifi-start-script
+            items:
+            - key: nifi-start.sh
+              path: nifi-start.sh
+      containers:
+        - name: nifi
+          image: 'apache/nifi:1.9.2'
+          imagePullPolicy: Always
+          resources: {}
+          command: ["bash", "/opt/nifi/scripts/special/nifi-start.sh"]
+          env:
+            - name: JAVA_OPTS
+              value: >-
+                -server -Xms256m -XX:+UnlockExperimentalVMOptions
+                -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1
+                -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit
+                -Djava.awt.headless=true -XshowSettings:vm
+                -Djava.security.egd=file:/dev/./urandom
+            - name: NIFI_WEB_HTTP_PORT
+              value: '8080'
+            - name: NIFI_CLUSTER_IS_NODE
+              value: 'true'
+            - name: NIFI_CLUSTER_NODE_PROTOCOL_PORT
+              value: '8082'
+            - name: NIFI_ZK_CONNECT_STRING
+              value: 'zookeeper:2181'
+            - name: NIFI_ELECTION_MAX_WAIT
+              value: 30 sec
+          ports:
+            - containerPort: 8080
+              name: web
+              protocol: TCP
+          volumeMounts:
+            - name: volume-nifi
+              mountPath: /data
+            - name: start-script
+              mountPath: /opt/nifi/scripts/special/
+
