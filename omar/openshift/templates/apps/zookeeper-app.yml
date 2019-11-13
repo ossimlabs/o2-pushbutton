@@ -18,7 +18,6 @@ metadata:
   labels:
     app: zookeeper
   name: zookeeper
-  namespace: omar-dev
 spec:
   replicas: 1
   selector:

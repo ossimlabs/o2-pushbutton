@@ -147,13 +147,13 @@
             ],
             "containers": [
               {
-                "name": "nifi-cluster",
-                "image": "apache/nifi:${NIFI_TAG}",
+                "name": "nifi",
+                "image": "apache/nifi:1.9.2",
                 "imagePullPolicy": "Always",
                 "command": ["bash", "/opt/nifi/scripts/special/nifi-start.sh"],
                 "env": [
                   {
-                    "name": "NIFI_WEB_PORT",
+                    "name": "NIFI_WEB_HTTP_PORT",
                     "value": "8080"
                   },
                   {
@@ -180,12 +180,7 @@
                 "ports": [
                   {
                     "containerPort": 8080,
-                    "name": "web",
-                    "protocol": "TCP"
-                  },
-                  {
-                    "containerPort": 8081,
-                    "name": "custom",
+                    "name": "8080-tcp",
                     "protocol": "TCP"
                   }
                 ],
@@ -357,7 +352,10 @@
       "kind": "Service",
       "metadata": {
         "name": "nifi",
-        "namespace": "${DEPLOYMENT_TARGET}"
+        "namespace": "${DEPLOYMENT_TARGET}",
+        "labels":{
+          "app": "nifi"
+        }
       },
       "spec": {
         "type": "ClusterIP",
@@ -379,7 +377,10 @@
       "kind": "Service",
       "metadata": {
         "name": "zookeeper",
-        "namespace": "${DEPLOYMENT_TARGET}"
+        "namespace": "${DEPLOYMENT_TARGET}",
+        "labels": {
+          "app": "zookeeper"
+        }
       },
       "spec": {
         "type": "ClusterIP",
