@@ -1,6 +1,8 @@
 ---
-releaseName: Juno
-releaseNumber: 2.7.2
+about:
+   contactEmail: cathy.alt-shoemaker@maxar.com
+   releaseName: Neptune
+   releaseNumber: 2.10.0
 
 banner:
    backgroundColor: darkgray
@@ -9,62 +11,7 @@ banner:
    text: BETA
    textColor: white
 
-serverProtocol: http
-serverName: localhost
-
-omarDb:
-  host: omar-postgres
-  username: postgres
-  password: postgres
-  port: 5432
-  name: omar-db
-  driver: org.postgresql.Driver
-  dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
-  url: jdbc:postgresql://${omarDb.host}:${omarDb.port}/${omarDb.name}
-
-grails:
-  serverURL: ${serverProtocol}://${serverName}${server.contextPath}
-
-spring:
-  zipkin:
-    enabled: false
-    baseUrl: http://omar-zipkin-server:9411
-  sleuth:
-    enabled: false
-    sampler:
-      percentage: 0.5
-  boot:
-    admin:
-      url: http://omar-admin-server:8080/omar-admin-server/
-      auto-deregistration: true
-      client:
-        prefer-ip: true
-      username: pushbutton-app #Client app username for Spring Boot Admin
-      password: PushButt()n123 #Client app password for Spring Boot Admin
-
-security:
-  user:
-    name: pushbutton #user name to authenticate for Spring Boot Admin
-    password: PushButt()n123 #Password to authenticate for Spring Boot Admin
-
-hystrix:
-  fallback:
-    enabled: false
-  execution:
-    timeout:
-      enabled: false
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://omar-eureka-server:8761/omar-eureka-server/eureka/
-  instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
-    preferIpAddress: true
-    statusPageUrlPath: ${server.contextPath}/info
-    homePageUrlPath: ${server.contextPath}
-    healthCheckUrlPath: ${server.contextPath}/health
+baseUrl: ${serverProtocol}://${serverName}
 
 endpoints:
   enabled: true
@@ -87,7 +34,32 @@ endpoints:
   loggers:
     sensitive: false
 
-loggingLevel: DEBUG
+environments:
+  production:
+    dataSource:
+      dbCreate: update
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://omar-eureka-server:8761/omar-eureka-server/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    preferIpAddress: true
+    statusPageUrlPath: ${server.contextPath}/info
+    homePageUrlPath: ${server.contextPath}
+    healthCheckUrlPath: ${server.contextPath}/health
+
+grails:
+  serverURL: ${serverProtocol}://${serverName}${server.contextPath}
+
+hystrix:
+  execution:
+    timeout:
+      enabled: false
+  fallback:
+    enabled: false
 
 logging:
   level:
@@ -106,26 +78,56 @@ logging:
     omar.wms: ${loggingLevel}
     omar.wmts: ${loggingLevel}
 
----
-swagger:
-  validatorUrl: null
-  info:
-    title: ${info.app.name} API
-    version: ${info.app.version}
-    contact:
-      name: "Radiant Solutions"
-      url: http://overview.${serverDomain}
-      email: "kurt.feldbush@radiantsolutions.com"
-    license:
-      name: "Licensed under MIT"
-      url: "https://opensource.org/licenses/MIT"
+loggingLevel: DEBUG
+
+omarDb:
+  host: omar-dev.cfussmnw2zzg.us-east-1.rds.amazonaws.com
+  username: postgres
+  password: omarftw123
+  port: 5432
+  name: o2_omar_db
+  driver: org.postgresql.Driver
+  dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
+  url: jdbc:postgresql://${omarDb.host}:${omarDb.port}/${omarDb.name}
+
+security:
+  user:
+    name: omar #user name to authenticate for Spring Boot Admin
+    password: omarftw123 #Password to authenticate for Spring Boot Admin
 
 securityClassification:
   backgroundColor: green
   classification: UNCLASSIFIED
   textColor: white
 
+serverDomain: ossim.io
+serverName: omar-dev.${serverDomain}
+serverNamePki: pki-omar-dev.${serverDomain}
+serverProtocol: https
+
 spring:
-  cloud:
-    discovery:
-      enabled: false
+  boot:
+    admin:
+      url: http://omar-admin-server:8080/omar-admin-server/
+      auto-deregistration: true
+      client:
+        prefer-ip: true
+      username: omar #Client app username for Spring Boot Admin
+      password: omarftw123 #Client app password for Spring Boot Admin
+
+swagger:
+  validatorUrl: null
+  info:
+    title: ${info.app.name} API
+    version: ${info.app.version}
+    contact:
+      name: "Maxar"
+      url: http://overview.${serverDomain}
+      email: "kurt.feldbush@maxar.com"
+    license:
+      name: "Licensed under MIT"
+      url: "https://opensource.org/licenses/MIT"
+
+userInfo:
+    requestHeaderUserName: username
+    requestHeaderUserNameDefault: Anonymous

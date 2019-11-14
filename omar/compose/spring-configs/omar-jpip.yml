@@ -10,4 +10,20 @@ environments:
       dialect:  ${omarDb.dialect}
       url:      ${omarDb.url}
       username: ${omarDb.username}
-      password: ${omarDb.password}  
+      password: ${omarDb.password}
+
+quartz:
+  jdbcStore: false
+  threadPool:
+    threadCount: 4
+
+omar:
+  jpip:
+    server:
+      cache: /data/jpip-cache
+      ip:    jpip.${serverDomain}
+      url:   jpip://jpip.${serverDomain}
+    oms:
+      chipper:
+        # Is the location of the chipper endpoint for chipping imagery.
+        url: 'http://omar-oms-app:8080/omar-oms/chipper/executeChipper'

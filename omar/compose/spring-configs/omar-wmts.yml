@@ -1,7 +1,6 @@
 ---
-server:
-  contextPath: /omar-wmts
-
+# This config makes the app connect to the database. It cannot be moved to application.yml, because apps without
+# the database drivers will attempt to connect to the database and crash
 environments:
   production:
     dataSource:
@@ -12,14 +11,3 @@ environments:
       url:      ${omarDb.url}
       username: ${omarDb.username}
       password: ${omarDb.password}
-
-omar:
-  wmts:
-    wfsUrl: http://omar-wfs-app:8080/omar-wfs/wfs
-    wmsUrl: http://omar-wms-app:8080/omar-wms/wms
-    oldmarWmsFlag: false
-    footprints:
-      url: ${serverProtocol}://${serverName}/omar-geoscript/footprints/getFootprints
-      layers: "omar:raster_entry"
-      styles: "byFileType"
-  
