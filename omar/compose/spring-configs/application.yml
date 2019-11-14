@@ -83,7 +83,7 @@ loggingLevel: DEBUG
 omarDb:
   host: omar-dev.cfussmnw2zzg.us-east-1.rds.amazonaws.com
   username: postgres
-  password: omarftw123
+  password: postgres
   port: 5432
   name: o2_omar_db
   driver: org.postgresql.Driver

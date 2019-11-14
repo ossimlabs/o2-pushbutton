@@ -217,13 +217,13 @@ networks:
     external: false
 
 volumes:
-  data_path:
-    driver: local
+  local_data:
     driver_opts:
-      type: bind
-      devices: /data
+      o: bind
+      type: none
+      device: ${PWD}/image-data
   pgdata:
     driver: local
     driver_opts:
       type: bind
-      devices: ./pgdata
+      device: ${PWD}/pgdata
