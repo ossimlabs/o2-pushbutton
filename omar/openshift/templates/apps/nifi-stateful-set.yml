@@ -79,7 +79,7 @@ spec:
             - name: NIFI_ZK_CONNECT_STRING
               value: 'zookeeper:2181'
             - name: NIFI_ELECTION_MAX_WAIT
-              value: 30 sec
+              value: 30 secs
           ports:
             - containerPort: 8080
               name: web
