@@ -1,0 +1,72 @@
+---
+omar:
+  sqs:
+    reader:
+      queue: "https://sqs.us-east-1.amazonaws.com/320588532383/avro-dev"
+      waitTimeSeconds: 20
+      maxNumberOfMessages: 1
+      pollingIntervalSeconds: 1
+      deleteMessageIfNoError: false
+      timestampName: "Timestamp"
+      pauseOnStart: false
+    stager:
+      deleteIfNotSupported: true
+      params:
+        buildThumbnails: "true"
+        buildHistograms: "true"
+        buildOverviews: "true"
+        overviewCompressionType: "NONE"
+        overviewType: "ossim_tiff_box"
+        thumbnailSize: 256
+        thumbnailType: "png"
+        thumbnailStretchType: "auto-minmax"
+        buildHistogramsWithR0: "true"
+avro:
+    attemptDelay: 5000
+    dateField: "observationDateTime"
+    dateFieldFormat: ""
+    destination:
+      type: ""
+    download:
+      # Added 1/29/19 by Aaron Drake
+      # ----------------------------------------
+      # A list of image types that should be excluded from downloading
+      blackList:
+        # Enables/Disables the black list
+        enabled: true
+        # The avro metadata field "key" to check the black list against
+        # Example: abstract
+        metadataField: uRL
+        # A comma separated list of terms that can be used for the black list.
+        # Searches are case insensitive
+        # Example: sicd, bar, 16mAy, sidd  This would exclude images like "SICD 123456789"
+        excludedTerms: geotiff
+        # Allows the ability to see what will be filtered out in the logs
+        testMode: true
+      # ----------------------------------------
+      directory: "/data/s3"
+      command: "wget --no-check-certificate -O <destination> <source>"
+    imageIdField: "imageId"
+    jsonSubFieldPath: "Message"
+    metadata:
+      addMetadataEndPoint: http://omar-avro-metadata:8080/omar-avro-metadata/avroMetadata/add
+    nAttempts: 10
+    sourceUriField: "uRL"
+---
+# This config makes the app connect to the database. It cannot be moved to application.yml, because apps without
+# the database drivers will attempt to connect to the database and crash
+environments:
+  production:
+    dataSource:
+      pooled: true
+      jmxExport: true
+      driverClassName: ${omarDb.driver}
+      dialect:  ${omarDb.dialect}
+      url:      ${omarDb.url}
+      username: ${omarDb.username}
+      password: ${omarDb.password}
+
+quartz:
+  jdbcStore: false
+  threadPool:
+    threadCount: 2

@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   omar-config-server:
-    image: quay.io/radiantsolutions/omar-config-server:${OMAR_CONFIG_SERVER_VERSION}
+    image: ${DOCKER_URL}/omar-config-server:${OMAR_CONFIG_SERVER_VERSION}
     env_file:
       - envs/omar-config-server.env
     volumes:
@@ -11,7 +11,7 @@ services:
       - omarnet
 
   omar-eureka-server:
-    image: quay.io/radiantsolutions/omar-eureka-server:${OMAR_EUREKA_SERVER_VERSION}
+    image: ${DOCKER_URL}/omar-eureka-server:${OMAR_EUREKA_SERVER_VERSION}
     env_file:
       - envs/omar-eureka-server.env
     networks:
@@ -19,7 +19,7 @@ services:
       - omarnet
 
   nifi:
-    image: quay.io/radiantsolutions/nifi:${OMAR_NIFI_VERSION}
+    image: ${DOCKER_URL}/nifi:${OMAR_NIFI_VERSION}
     env_file:
       - envs/nifi.env
     networks:
@@ -27,7 +27,7 @@ services:
       - omarnet
 
   omar-admin-server:
-    image: quay.io/radiantsolutions/omar-admin-server:${OMAR_ADMIN_SERVER_VERSION}
+    image: ${DOCKER_URL}/omar-admin-server:${OMAR_ADMIN_SERVER_VERSION}
     env_file:
       - envs/omar-admin-server.env
     networks:
@@ -35,7 +35,7 @@ services:
       - omarnet
 
   omar-disk-cleanup-app:
-    image: quay.io/radiantsolutions/omar-disk-cleanup-app:${OMAR_DISK_CLEANUP_VERSION}
+    image: ${DOCKER_URL}/omar-disk-cleanup-app:${OMAR_DISK_CLEANUP_VERSION}
     env_file:
       - envs/omar-disk-cleanup-app.env
     networks:
@@ -43,17 +43,17 @@ services:
       - omarnet
 
   omar-download-app:
-    image: quay.io/radiantsolutions/omar-download-app:${OMAR_DOWNLOAD_APP_VERSION}
+    image: ${DOCKER_URL}/omar-download-app:${OMAR_DOWNLOAD_APP_VERSION}
     env_file:
       - envs/omar-download-app.env
     volumes:
-      - ./image-data:/data
+      - data_path:/data
     networks:
       - proxynet
       - omarnet
 
   omar-geoscript-app:
-    image: quay.io/radiantsolutions/omar-geoscript-app:${OMAR_GEOSCRIPT_APP_VERSION}
+    image: ${DOCKER_URL}/omar-geoscript-app:${OMAR_GEOSCRIPT_APP_VERSION}
     env_file:
       - envs/omar-geoscript-app.env
     networks:
@@ -61,17 +61,17 @@ services:
       - omarnet
 
   omar-mensa-app:
-    image: quay.io/radiantsolutions/omar-mensa-app:${OMAR_MENSA_APP_VERSION}
+    image: ${DOCKER_URL}/omar-mensa-app:${OMAR_MENSA_APP_VERSION}
     env_file:
       - envs/omar-mensa-app.env
     volumes:
-      - ./image-data:/data
+      - data_path:/data
     networks:
       - proxynet
       - omarnet
 
   omar-ml:
-    image: quay.io/radiantsolutions/omar-ml:${OMAR_ML_VERSION}
+    image: ${DOCKER_URL}/omar-ml:${OMAR_ML_VERSION}
     env_file:
       - envs/omar-ml.env
     networks:
@@ -79,17 +79,17 @@ services:
       - omarnet
 
   omar-oms-app:
-    image: quay.io/radiantsolutions/omar-oms-app:${OMAR_OMS_APP_VERSION}
+    image: ${DOCKER_URL}/omar-oms-app:${OMAR_OMS_APP_VERSION}
     env_file:
       - envs/omar-oms-app.env
     volumes:
-      - ./image-data:/data
+      - data_path:/data
     networks:
       - proxynet
       - omarnet
 
   omar-services-monitor-app:
-    image: quay.io/radiantsolutions/omar-services-monitor-app:${OMAR_SERVICES_MONITOR_VERSION}
+    image: ${DOCKER_URL}/omar-services-monitor-app:${OMAR_SERVICES_MONITOR_VERSION}
     env_file:
       - envs/omar-services-monitor-app.env
     networks:
@@ -97,17 +97,17 @@ services:
       - omarnet
 
   omar-stager-app:
-    image: quay.io/radiantsolutions/omar-stager-app:${OMAR_STAGER_APP_VERSION}
+    image: ${DOCKER_URL}/omar-stager-app:${OMAR_STAGER_APP_VERSION}
     env_file:
       - envs/omar-stager-app.env
     volumes:
-      - ./image-data:/data
+      - data_path:/data
     networks:
       - proxynet
       - omarnet
 
   omar-superoverlay-app:
-    image: quay.io/radiantsolutions/omar-superoverlay-app:${OMAR_SUPEROVERLAY_APP_VERSION}
+    image: ${DOCKER_URL}/omar-superoverlay-app:${OMAR_SUPEROVERLAY_APP_VERSION}
     env_file:
       - envs/omar-superoverlay-app.env
     networks:
@@ -115,7 +115,7 @@ services:
       - omarnet
 
   omar-twofishes:
-    image: quay.io/radiantsolutions/omar-twofishes:${OMAR_TWOFISHES_VERSION}
+    image: ${DOCKER_URL}/omar-twofishes:${OMAR_TWOFISHES_VERSION}
     env_file:
       - envs/omar-twofishes.env
     networks:
@@ -123,17 +123,17 @@ services:
       - omarnet
 
   omar-upload-app:
-    image: quay.io/radiantsolutions/omar-upload-app:${OMAR_UPLOAD_APP_VERSION}
+    image: ${DOCKER_URL}/omar-upload-app:${OMAR_UPLOAD_APP_VERSION}
     env_file:
       - envs/omar-upload-app.env
     volumes:
-      - ./image-data:/data
+      - data_path:/data
     networks:
       - proxynet
       - omarnet
 
   omar-wcs-app:
-    image: quay.io/radiantsolutions/omar-wcs-app:${OMAR_WCS_APP_VERSION}
+    image: ${DOCKER_URL}/omar-wcs-app:${OMAR_WCS_APP_VERSION}
     env_file:
       - envs/omar-wcs-app.env
     networks:
@@ -141,7 +141,7 @@ services:
       - omarnet
 
   omar-wfs-app:
-    image: quay.io/radiantsolutions/omar-wfs-app:${OMAR_WFS_APP_VERSION}
+    image: ${DOCKER_URL}/omar-wfs-app:${OMAR_WFS_APP_VERSION}
     env_file:
       - envs/omar-wfs-app.env
     networks:
@@ -149,7 +149,7 @@ services:
       - omarnet
 
   omar-wms-app:
-    image: quay.io/radiantsolutions/omar-wms-app:${OMAR_WMS_APP_VERSION}
+    image: ${DOCKER_URL}/omar-wms-app:${OMAR_WMS_APP_VERSION}
     env_file:
       - envs/omar-wms-app.env
     networks:
@@ -157,7 +157,7 @@ services:
       - omarnet
 
   omar-wmts-app:
-    image: quay.io/radiantsolutions/omar-wmts-app:${OMAR_WMTS_APP_VERSION}
+    image: ${DOCKER_URL}/omar-wmts-app:${OMAR_WMTS_APP_VERSION}
     env_file:
       - envs/omar-wmts-app.env
     networks:
@@ -165,7 +165,7 @@ services:
       - omarnet
 
   rabbitmq:
-    image: quay.io/radiantsolutions/rabbitmq:${RABBITMQ_VERSION}
+    image: ${DOCKER_URL}/rabbitmq:${RABBITMQ_VERSION}
     env_file:
       - envs/rabbitmq.env
     networks:
@@ -173,7 +173,7 @@ services:
       - omarnet
 
   tlv-app:
-    image: quay.io/radiantsolutions/tlv-app:${TLV_APP_VERSION}
+    image: ${DOCKER_URL}/tlv-app:${TLV_APP_VERSION}
     env_file:
       - envs/tlv-app.env
     networks:
@@ -181,7 +181,7 @@ services:
       - omarnet
 
   omar-ui-app:
-    image: quay.io/radiantsolutions/omar-ui-app:${OMAR_UI_APP_VERSION}
+    image: ${DOCKER_URL}/omar-ui-app:${OMAR_UI_APP_VERSION}
     env_file:
       - envs/omar-ui-app.env
     networks:
@@ -189,23 +189,23 @@ services:
       - omarnet
 
   omar-basemap:
-    image: quay.io/radiantsolutions/omar-basemap:${OMAR_BASEMAP_VERSION}
+    image: ${DOCKER_URL}/omar-basemap:${OMAR_BASEMAP_VERSION}
     networks:
       - proxynet
       - omarnet
 
   omar-mapproxy:
-    image: quay.io/radiantsolutions/omar-mapproxy:${OMAR_MAPPROXY_VERSION}
+    image: ${DOCKER_URL}/omar-mapproxy:${OMAR_MAPPROXY_VERSION}
     networks:
       - proxynet
       - omarnet
 
   omar-postgres:
-    image: quay.io/radiantsolutions/postgres-postgis-trgm:${OMAR_POSTGRES_VERSION}
+    image: ${DOCKER_URL}/postgres-postgis-trgm:${OMAR_POSTGRES_VERSION}
     env_file:
       - envs/omar-postgres.env
     volumes:
-      - ./pgdata:/var/lib/postgresql/data/pgdata
+      - pgdata:/var/lib/postgresql/data/pgdata
     networks:
       - proxynet
       - omarnet
@@ -215,3 +215,15 @@ networks:
     name: proxynet
   omarnet:
     external: false
+
+volumes:
+  local_data:
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/image-data
+  pgdata:
+    driver: local
+    driver_opts:
+      type: bind
+      device: ${PWD}/pgdata
