@@ -13,7 +13,7 @@
             "displayName": "DEPLOYMENT_TARGET",
             "description": "",
             "required": true,
-            "value": "default"
+            "value": "dev"
           }
     ],
     "objects": [
