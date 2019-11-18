@@ -7,6 +7,15 @@
     "labels": {
         "template": "nifi-cluster"
     },
+    "parameters": [
+        {
+            "name": "DEPLOYMENT_TARGET",
+            "displayName": "DEPLOYMENT_TARGET",
+            "description": "",
+            "required": true,
+            "value": "default"
+          }
+    ],
     "objects": [
         {
             "kind": "ConfigMap",
