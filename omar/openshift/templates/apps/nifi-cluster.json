@@ -14,6 +14,13 @@
             "description": "",
             "required": true,
             "value": "dev"
+          },
+          {
+            "name": "OSSIM_DATA_PV_NAME",
+            "displayName": "OSSIM_DATA_PV_NAME",
+            "description": "Persistent volume storage base name",
+            "required": true,
+            "value": "ossim-data"
           }
     ],
     "objects": [
@@ -81,7 +88,7 @@
                             {
                                 "name": "volume-nifi",
                                 "persistentVolumeClaim": {
-                                    "claimName": "ossim-data-dev-pvc"
+                                    "claimName": "${OSSIM_DATA_PV_NAME}-pvc"
                                 }
                             },
                             {
