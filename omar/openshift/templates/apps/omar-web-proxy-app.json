@@ -88,6 +88,18 @@
       "value": "1000Mi"
     },
     {
+      "name": "CPU_MIN",
+      "displayName": "CPU_MIN",
+      "description": "Minimum cpu request for this app to have",
+      "value": "10m"
+    },
+    {
+      "name": "CPU_MAX",
+      "displayName": "CPU_MAX",
+      "description": "Maximum cpu request for this app to have",
+      "value": "20m"
+    },
+    {
       "name": "JAVA_OPTS",
       "displayName": "JAVA_OPTS",
       "description": "Desired value for the JAVA_OPTS environment variable",
@@ -162,10 +174,12 @@
                 ],
                 "resources": {
                   "requests": {
-                    "memory": "${MEMORY_MIN}"
+                    "memory": "${MEMORY_MIN}",
+                    "cpu": "${CPU_MIN}"
                   },
                   "limits": {
-                    "memory": "${MEMORY_MAX}"
+                    "memory": "${MEMORY_MAX}",
+                    "cpu": "${CPU_MAX}"
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log",
