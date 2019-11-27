@@ -316,6 +316,31 @@
           }
         ]
       }
+    },
+    {
+      "apiVersion": "autoscaling/v2beta1",
+      "kind": "HorizontalPodAutoscaler",
+      "metadata": {
+        "name": "omar-oms-app"
+      },
+      "spec": {
+        "scaleTargetRef": {
+          "apiVersion": "apps/v1",
+          "kind": "ReplicationController",
+          "name": "omar-oms-app"
+        },
+        "minReplicas": 1,
+        "maxReplicas": 3,
+        "metrics": [
+          {
+            "type": "Resource",
+            "resource": {
+              "name": "memory",
+              "targetAverageUtilization": 50
+            }
+          }
+        ]
+      }
     }
   ]
 }
