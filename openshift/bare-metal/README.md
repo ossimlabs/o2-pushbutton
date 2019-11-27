@@ -142,6 +142,8 @@ We can override the variable without editing the scripts but the original list c
 
 **Step 12.** Edit the openshift inventory file:  
 ```bash
+cd ~
+git clone https://github.com/ossimlabs/o2-pushbutton.git
 cp o2-pushbutton/openshift/bare-metal/openshift-inventory-sample ~/openshift-inventory
 vi ~/openshift-inventory
 ```
