@@ -202,7 +202,7 @@
       "name": "CPU_MAX",
       "displayName": "CPU_MAX",
       "description": "Maximum cpu request for this app to have",
-      "value": "100m"
+      "value": "300m"
     },
     {
       "name": "CLEANUP_DRYRUN",
