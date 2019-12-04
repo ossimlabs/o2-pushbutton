@@ -40,14 +40,7 @@
       "description": "Docker Container Image Version Tag",
       "required": true,
       "value": "latest"
-    },
-    {
-      "name": "OSSIM_DATA_PV_NAME",
-      "displayName": "OSSIM_DATA_PV_NAME",
-      "description": "Persistent volume storage base name",
-      "required": true,
-      "value": "ossim-data"
-    },
+    }
     {
       "name": "REPLICAS",
       "displayName": "REPLICAS",
@@ -192,10 +185,10 @@
             "terminationGracePeriodSeconds": 30,
             "volumes": [
               {
-                "name": "dashboard-config",
-                "persistentVolumeClaim": {
-                  "claimName": "${OSSIM_DATA_PV_NAME}-pvc"
-                }
+                "configMap": {
+                  "name": "dashboard-config"
+                },
+                "name": "dashboard-config"
               }
             ]
           }
