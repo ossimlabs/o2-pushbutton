@@ -40,7 +40,7 @@
       "description": "Docker Container Image Version Tag",
       "required": true,
       "value": "latest"
-    }
+    },
     {
       "name": "REPLICAS",
       "displayName": "REPLICAS",
