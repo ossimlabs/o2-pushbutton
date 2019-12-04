@@ -84,13 +84,13 @@
       "name": "CPU_MIN",
       "displayName": "CPU_MIN",
       "description": "Minimum cpu request for this app to have",
-      "value": "20m"
+      "value": "30m"
     },
     {
       "name": "CPU_MAX",
       "displayName": "CPU_MAX",
       "description": "Maximum cpu request for this app to have",
-      "value": "500m"
+      "value": "1000m"
     },
     {
       "name": "JAVA_OPTS",
