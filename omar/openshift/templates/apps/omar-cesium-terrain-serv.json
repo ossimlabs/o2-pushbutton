@@ -84,7 +84,7 @@
       "name": "CPU_MIN",
       "displayName": "CPU_MIN",
       "description": "Minimum cpu request for this app to have",
-      "value": "10m"
+      "value": "5m"
     },
     {
       "name": "CPU_MAX",
