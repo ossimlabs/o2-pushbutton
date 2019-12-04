@@ -186,7 +186,7 @@
             "volumes": [
               {
                 "configMap": {
-                  "name": "dashboard-config"
+                  "name": "kibana-dashboard-tests"
                 },
                 "name": "dashboard-config"
               }
