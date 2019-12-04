@@ -170,7 +170,13 @@
                     "cpu": "${CPU_MAX}"
                   }
                 },
-                "terminationMessagePath": "/dev/termination-log"
+                "terminationMessagePath": "/dev/termination-log",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/dashboard/config",
+                    "name": "dashboard-config"
+                  }
+                ]
               }
             ],
             "dnsPolicy": "ClusterFirst",
