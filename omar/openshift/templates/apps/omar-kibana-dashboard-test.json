@@ -62,6 +62,12 @@
       "value": "false"
     },
     {
+      "name": "IMAGE_PULL_SECRET",
+      "displayName": "IMAGE_PULL_SECRET",
+      "description": "The name of the secret to use for pulling docker images from an external registry",
+      "value": "registry-creds"
+    },
+    {
       "name": "MEMORY_MIN",
       "displayName": "MEMORY_MIN",
       "description": "Minimum memory for this app to have",
@@ -142,6 +148,17 @@
                 ],
                 "image": "${OPENSHIFT_DOCKER_REGISTRY_URL}/${DEPLOYMENT_TARGET}/${APP_NAME}:${TAG}",
                 "imagePullPolicy": "Always",
+                "livenessProbe": {
+                  "failureThreshold": 5,
+                  "initialDelaySeconds": 20,
+                  "periodSeconds": 15,
+                  "successThreshold": 1,
+                  "httpGet": {
+                    "path": "/frontend-test/",
+                    "port": 8080
+                  },
+                  "timeoutSeconds": 3
+                },
                 "name": "${APP_NAME}",
                 "ports": [
                   {
@@ -166,6 +183,11 @@
                     "name": "dashboard-config"
                   }
                 ]
+              }
+            ],
+            "imagePullSecrets": [
+              {
+                "name": "${IMAGE_PULL_SECRET}"
               }
             ],
             "dnsPolicy": "ClusterFirst",
