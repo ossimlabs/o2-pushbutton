@@ -327,7 +327,7 @@
         "scaleTargetRef": {
           "apiVersion": "v1",
           "kind": "DeploymentConfig",
-          "name": "deploymentconfig.apps.openshift.io/omar-oms-app"
+          "name": "omar-oms-app"
         },
         "minReplicas": 1,
         "maxReplicas": 4,
