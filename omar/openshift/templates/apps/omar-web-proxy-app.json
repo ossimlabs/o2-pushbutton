@@ -97,7 +97,7 @@
       "name": "CPU_MAX",
       "displayName": "CPU_MAX",
       "description": "Maximum cpu request for this app to have",
-      "value": "300m"
+      "value": "600m"
     },
     {
       "name": "JAVA_OPTS",
