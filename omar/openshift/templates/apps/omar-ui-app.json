@@ -153,7 +153,7 @@
                 "image": "${OPENSHIFT_DOCKER_REGISTRY_URL}/${DEPLOYMENT_TARGET}/omar-ui-app:${TAG}",
                 "imagePullPolicy": "Always",
                 "livenessProbe": {
-                  "failureThreshold": 5,
+                  "failureThreshold": 3,
                   "initialDelaySeconds": 30,
                   "periodSeconds": 15,
                   "successThreshold": 1,
@@ -287,24 +287,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "apiVersion": "autoscaling/v1",
-      "kind": "HorizontalPodAutoscaler",
-      "metadata": {
-        "name": "omar-ui-app",
-        "namespace": "${DEPLOYMENT_TARGET}"
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "apiVersion": "v1",
-          "kind": "DeploymentConfig",
-          "name": "omar-ui-app"
-        },
-        "minReplicas": 1,
-        "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
       }
     }
   ]

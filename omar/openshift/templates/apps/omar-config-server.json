@@ -306,24 +306,6 @@
           }
         ]
       }
-    },
-    {
-      "apiVersion": "autoscaling/v1",
-      "kind": "HorizontalPodAutoscaler",
-      "metadata": {
-        "name": "omar-config-server",
-        "namespace": "${DEPLOYMENT_TARGET}"
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "apiVersion": "v1",
-          "kind": "DeploymentConfig",
-          "name": "omar-config-server"
-        },
-        "minReplicas": 1,
-        "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
-      }
     }
   ]
 }

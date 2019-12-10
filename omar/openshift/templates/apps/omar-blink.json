@@ -296,24 +296,6 @@
           }
         ]
       }
-    },
-    {
-      "apiVersion": "autoscaling/v1",
-      "kind": "HorizontalPodAutoscaler",
-      "metadata": {
-        "name": "omar-blink",
-        "namespace": "${DEPLOYMENT_TARGET}"
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "apiVersion": "v1",
-          "kind": "DeploymentConfig",
-          "name": "omar-blink"
-        },
-        "minReplicas": 1,
-        "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
-      }
     }
   ]
 }

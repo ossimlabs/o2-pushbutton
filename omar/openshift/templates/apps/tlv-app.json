@@ -156,7 +156,7 @@
                 "image": "${OPENSHIFT_DOCKER_REGISTRY_URL}/${DEPLOYMENT_TARGET}/tlv-app:${TAG}",
                 "imagePullPolicy": "Always",
                 "livenessProbe": {
-                  "failureThreshold": 5,
+                  "failureThreshold": 3,
                   "initialDelaySeconds": 30,
                   "periodSeconds": 15,
                   "successThreshold": 1,

@@ -322,24 +322,6 @@
           }
         ]
       }
-    },
-    {
-      "apiVersion": "autoscaling/v1",
-      "kind": "HorizontalPodAutoscaler",
-      "metadata": {
-        "name": "omar-sqs-stager-cucumber",
-        "namespace": "${DEPLOYMENT_TARGET}"
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "apiVersion": "v1",
-          "kind": "DeploymentConfig",
-          "name": "omar-sqs-stager-cucumber"
-        },
-        "minReplicas": 1,
-        "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
-      }
     }
   ]
 }

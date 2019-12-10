@@ -413,24 +413,6 @@
           }
         ]
       }
-    },
-    {
-      "apiVersion": "autoscaling/v1",
-      "kind": "HorizontalPodAutoscaler",
-      "metadata": {
-        "name": "omar-streetview-app",
-        "namespace": "${DEPLOYMENT_TARGET}"
-      },
-      "spec": {
-        "scaleTargetRef": {
-          "apiVersion": "v1",
-          "kind": "DeploymentConfig",
-          "name": "omar-streetview-app"
-        },
-        "minReplicas": 1,
-        "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
-      }
     }
   ]
 }
