@@ -318,28 +318,20 @@
       }
     },
     {
-      "apiVersion": "autoscaling/v2beta1",
+      "apiVersion": "autoscaling/v1",
       "kind": "HorizontalPodAutoscaler",
       "metadata": {
         "name": "omar-oms-app"
       },
       "spec": {
         "scaleTargetRef": {
-          "apiVersion": "apps/v1",
-          "kind": "ReplicationController",
+          "apiVersion": "v1",
+          "kind": "DeploymentConfig",
           "name": "omar-oms-app"
         },
         "minReplicas": 1,
-        "maxReplicas": 3,
-        "metrics": [
-          {
-            "type": "Resource",
-            "resource": {
-              "name": "memory",
-              "targetAverageUtilization": 50
-            }
-          }
-        ]
+        "maxReplicas": 4,
+        "targetCPUUtilizationPercentage": 70
       }
     }
   ]
