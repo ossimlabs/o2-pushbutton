@@ -321,7 +321,8 @@
       "apiVersion": "autoscaling/v1",
       "kind": "HorizontalPodAutoscaler",
       "metadata": {
-        "name": "omar-oms-app"
+        "name": "omar-oms-app",
+        "namespace": "${DEPLOYMENT_TARGET}"
       },
       "spec": {
         "scaleTargetRef": {
