@@ -345,7 +345,7 @@
         },
         "minReplicas": 1,
         "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
+        "targetCPUUtilizationPercentage": 80
       }
     }
   ]

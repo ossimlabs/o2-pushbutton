@@ -327,12 +327,12 @@
       "spec": {
         "scaleTargetRef": {
           "apiVersion": "v1",
-          "kind": "ReplicationController",
+          "kind": "DeploymentConfig",
           "name": "omar-oms-app"
         },
         "minReplicas": 1,
         "maxReplicas": 4,
-        "targetCPUUtilizationPercentage": 70
+        "targetCPUUtilizationPercentage": 80
       }
     }
   ]
