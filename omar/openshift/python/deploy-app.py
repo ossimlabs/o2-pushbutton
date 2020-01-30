@@ -110,6 +110,7 @@ class Deployer:
         # Wipe the tracked deployments for the new phase
         self.tracked_deployments = []
         self.failed_app_deployments = []
+        deployments_successful = True
 
         phase_processes = {}
         for app_name in phase:
