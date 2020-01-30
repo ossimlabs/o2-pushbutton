@@ -23,7 +23,7 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}"
+        "name": "${NEXUS_SERVICE_NAME}-web"
       },
       "spec": {
         "host": "${NEXUS_ROUTE}",
@@ -48,16 +48,16 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}-docker"
+        "name": "${NEXUS_SERVICE_NAME}-docker-public-group"
       },
       "spec": {
-        "host": "${NEXUS_DOCKER_ROUTE}",
+        "host": "${NEXUS_SERVICE_NAME}-docker-public-group.ossim.io",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
         },
         "port": {
-          "targetPort": "docker"
+          "targetPort": "docker-public-group"
         },
         "to": {
           "kind": "Service",
@@ -73,16 +73,66 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}-docker-public"
+        "name": "${NEXUS_SERVICE_NAME}-docker-public-hosted"
       },
       "spec": {
-        "host": "${NEXUS_DOCKER_PUBLIC_ROUTE}",
+        "host": "${NEXUS_SERVICE_NAME}-docker-public-hosted.ossim.io",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
         },
         "port": {
-          "targetPort": "docker-public"
+          "targetPort": "docker-public-hosted"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NEXUS_SERVICE_NAME}"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "annotations": {
+          "haproxy.router.openshift.io/timeout": "4m",
+          "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
+        },
+        "name": "${NEXUS_SERVICE_NAME}-docker-private-group"
+      },
+      "spec": {
+        "host": "${NEXUS_SERVICE_NAME}-docker-private-group.ossim.io",
+        "tls": {
+          "insecureEdgeTerminationPolicy": "Redirect",
+          "termination": "edge"
+        },
+        "port": {
+          "targetPort": "docker-private-group"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NEXUS_SERVICE_NAME}"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "annotations": {
+          "haproxy.router.openshift.io/timeout": "4m",
+          "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
+        },
+        "name": "${NEXUS_SERVICE_NAME}-docker-private-hosted"
+      },
+      "spec": {
+        "host": "${NEXUS_SERVICE_NAME}-docker-private-hosted.ossim.io",
+        "tls": {
+          "insecureEdgeTerminationPolicy": "Redirect",
+          "termination": "edge"
+        },
+        "port": {
+          "targetPort": "docker-private-hosted"
         },
         "to": {
           "kind": "Service",
@@ -263,18 +313,32 @@
             "targetPort": 8081
           },
           {
-            "name": "docker",
-            "nodePort": 0,
-            "port": 8082,
-            "protocol": "TCP",
-            "targetPort": 8082
-          },
-          {
-            "name": "docker-public",
+            "name": "docker-public-group",
             "nodePort": 0,
             "port": 5000,
             "protocol": "TCP",
             "targetPort": 5000
+          },
+          {
+            "name": "docker-public-hosted",
+            "nodePort": 0,
+            "port": 5001,
+            "protocol": "TCP",
+            "targetPort": 5001
+          },
+          {
+            "name": "docker-private-group",
+            "nodePort": 0,
+            "port": 5002,
+            "protocol": "TCP",
+            "targetPort": 5002
+          },
+          {
+            "name": "docker-private-hosted",
+            "nodePort": 0,
+            "port": 5003,
+            "protocol": "TCP",
+            "targetPort": 5003
           }
         ],
         "selector": {
