@@ -168,7 +168,7 @@
                 "readinessProbe": {
                   "failureThreshold": 15,
                   "httpGet": {
-                    "path": "/omar-reachback/health",
+                    "path": "/omar-reachback/actuator/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
