@@ -16,6 +16,27 @@
       "value": "dev"
     },
     {
+      "name": "DOMAIN_NAME",
+      "displayName": "DOMAIN_NAME",
+      "description": "Host Domain Name",
+      "required": true,
+      "value": "ossim.io"
+    },
+    {
+      "name": "WEB_PROXY_ROUTE_PREFIX",
+      "displayName": "WEB_PROXY_ROUTE_PREFIX",
+      "description": "Prefix for the web proxy mount",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "PKI_PROXY_ROUTE_PREFIX",
+      "displayName": "PKI_PROXY_ROUTE_PREFIX",
+      "description": "Prefix for the pki proxy mount",
+      "required": true,
+      "value": ""
+    },
+    {
       "name": "SHARDING_PROXY_ROUTE_NAME",
       "displayName": "SHARDING_PROXY_ROUTE_NAME",
       "description": "Name for the web proxy mount",
