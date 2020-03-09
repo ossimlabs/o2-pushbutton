@@ -1,0 +1,217 @@
+{
+  "apiVersion": "v1",
+  "kind": "Template",
+  "metadata": {
+    "name": "omar-openshift-template"
+  },
+  "labels": {
+    "template": "omar-openshift-template"
+  },
+  "parameters": [
+    {
+      "name": "DEPLOYMENT_TARGET",
+      "displayName": "DEPLOYMENT_TARGET",
+      "description": "Deployment target (dev|stage|blue|green)",
+      "required": true,
+      "value": "dev"
+    },
+    {
+      "name": "DOMAIN_NAME",
+      "displayName": "DOMAIN_NAME",
+      "description": "Host Domain Name",
+      "required": true,
+      "value": "ossim.io"
+    },
+    {
+      "name": "WEB_PROXY_ROUTE_PREFIX",
+      "displayName": "WEB_PROXY_ROUTE_PREFIX",
+      "description": "Prefix for the web proxy mount",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "PKI_PROXY_ROUTE_PREFIX",
+      "displayName": "PKI_PROXY_ROUTE_PREFIX",
+      "description": "Prefix for the pki proxy mount",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "SHARDING_PROXY_ROUTE_NAME",
+      "displayName": "SHARDING_PROXY_ROUTE_NAME",
+      "description": "Name for the web proxy mount",
+      "required": false,
+      "value": "route-sharding-omar"
+    }
+  ],
+  "objects": [
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-a",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "a-${WEB_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-web-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-b",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "b-${WEB_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-web-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-c",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "c-${WEB_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-web-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-d",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "d-${WEB_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-web-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-pki-a",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "a-${PKI_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-pki-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-pki-b",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "b-${PKI_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-pki-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-pki-c",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "c-${PKI_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-pki-proxy-app"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "name": "${SHARDING_PROXY_ROUTE_NAME}-pki-d",
+        "namespace": "${DEPLOYMENT_TARGET}"
+      },
+      "spec": {
+        "host": "d-${PKI_PROXY_ROUTE_PREFIX}.${DOMAIN_NAME}",
+        "port": {
+          "targetPort": "443-tcp"
+        },
+        "tls": {
+          "termination": "passthrough"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "omar-pki-proxy-app"
+        }
+      }
+    }
+  ]
+}
