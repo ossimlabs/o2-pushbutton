@@ -417,7 +417,7 @@
       "description": "The EBS volume ID",
       "displayName": "EBS Volume ID",
       "name": "EBS_VOLUME_ID",
-      "required": true,
+      "required": true
     },
     {
       "description": "The OpenShift Namespace where the Nexus ImageStream resides.",
@@ -429,7 +429,7 @@
       "description": "The Docker Registry the ImageStream will pull from.",
       "displayName": "Nexus ImageStream Namespace",
       "name": "DOCKER_REGISTRY",
-      "value": "quay.io/radiantsolutions"
+      "value": "nexus-docker-public-hosted.ossim.io"
     },
     {
       "description": "The Route that will redirect to Nexus",

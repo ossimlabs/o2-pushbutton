@@ -11,7 +11,7 @@
       "description": "",
       "displayName": "",
       "name": "DOCKER_IMAGE_REPO",
-      "value": "quay.io/radiantsolutions"
+      "value": "nexus-docker-public-hosted.ossim.io"
     },
     {
       "description": "",

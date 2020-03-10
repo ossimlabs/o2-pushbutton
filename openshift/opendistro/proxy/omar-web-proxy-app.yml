@@ -31,7 +31,7 @@ spec:
         deploymentconfig: omar-web-proxy-app
     spec:
       containers:
-      - image: quay.io/radiantsolutions/omar-web-proxy-app:latest
+      - image: nexus-docker-public-hosted.ossim.io/omar-web-proxy-app:latest
         imagePullPolicy: Always
         name: omar-web-proxy-app
         ports:

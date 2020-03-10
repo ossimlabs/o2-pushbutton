@@ -46,7 +46,7 @@ spec:
         - env:
             - name: ALLOW_ANONYMOUS_LOGIN
               value: 'yes'
-          image: quay.io/radiantsolutions/zookeeper
+          image: nexus-docker-public-hosted.ossim.io/zookeeper
           imagePullPolicy: Always
           name: zookeeper
           ports:

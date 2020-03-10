@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   omar-web-proxy-app:
-    image: quay.io/radiantsolutions/omar-web-proxy-app:latest
+    image: nexus-docker-public-hosted.ossim.io/omar-web-proxy-app:latest
     ports:
       - 80:80
       - 443:443
