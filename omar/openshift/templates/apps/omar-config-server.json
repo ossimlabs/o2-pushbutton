@@ -196,6 +196,11 @@
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log",
+                "imagePullSecrets": [
+                  {
+                    "name": "${IMAGE_PULL_SECRET}"
+                  }
+                ],
                 "volumeMounts": [
                   {
                     "mountPath": "/home/omar/configs",
