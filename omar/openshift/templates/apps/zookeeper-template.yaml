@@ -49,7 +49,7 @@ objects:
             - env:
                 - name: ALLOW_ANONYMOUS_LOGIN
                   value: 'yes'
-              image: nexus-docker-public-hosted.ossim.io/zookeeper
+              image: nexus-docker-public-group.ossim.io/zookeeper
               imagePullPolicy: Always
               name: zookeeper
               ports:
