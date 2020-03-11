@@ -196,17 +196,17 @@
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullSecrets": [
-                  {
-                    "name": "${IMAGE_PULL_SECRET}"
-                  }
-                ],
                 "volumeMounts": [
                   {
                     "mountPath": "/home/omar/configs",
                     "name": "spring-config"
                   }
                 ]
+              }
+            ],
+            "imagePullSecrets": [
+              {
+                "name": "${IMAGE_PULL_SECRET}"
               }
             ],
             "dnsPolicy": "ClusterFirst",
