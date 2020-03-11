@@ -49,17 +49,24 @@
       "value": "1"
     },
     {
-      "name": "INSECURE_REPOSITORY",
-      "displayName": "INSECURE_REPOSITORY",
-      "description": "Mark the image stream as an insecure repository",
-      "value": "false"
-    },
-    {
       "name": "IMAGE_NAME",
       "displayName": "IMAGE_NAME",
       "description": "The name of the docker image to pull",
       "required": true,
       "value": ""
+    },
+    {
+      "name": "IMAGE_PULL_SECRET",
+      "displayName": "IMAGE_PULL_SECRET",
+      "description": "The name of the secret to use for pulling docker images from an external registry",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "INSECURE_REPOSITORY",
+      "displayName": "INSECURE_REPOSITORY",
+      "description": "Mark the image stream as an insecure repository",
+      "value": "false"
     },
     {
       "name": "MEMORY_MIN",
@@ -202,11 +209,6 @@
                     "name": "spring-config"
                   }
                 ]
-              }
-            ],
-            "imagePullSecrets": [
-              {
-                "name": "${IMAGE_PULL_SECRET}"
               }
             ],
             "imagePullSecrets": [
