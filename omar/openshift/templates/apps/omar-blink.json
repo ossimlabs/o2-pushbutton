@@ -12,7 +12,7 @@
       "description": "",
       "displayName": "",
       "name": "DOCKER_IMAGE_REPO",
-      "value": "nexus-docker-public-hosted.ossim.io"
+      "value": "nexus-docker-private-hosted.ossim.io"
     },
     {
       "description": "",
