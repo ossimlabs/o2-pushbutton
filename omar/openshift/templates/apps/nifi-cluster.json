@@ -234,7 +234,7 @@
                                         "value": "yes"
                                     }
                                 ],
-                                "image": "nexus-docker-public-group.ossim.io/zookeeper",
+                                "image": "nexus-docker-private-group.ossim.io/zookeeper",
                                 "imagePullPolicy": "Always",
                                 "name": "zookeeper",
                                 "ports": [
