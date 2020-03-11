@@ -351,9 +351,14 @@
                 "imagePullPolicy": "Always"
               }
             ],
+            "imagePullSecrets": [
+              {
+                "name": "${IMAGE_PULL_SECRET}"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
             "restartPolicy": "Always",
             "terminationGracePeriodSeconds": 30,
-            "dnsPolicy": "ClusterFirst",
             "securityContext": {}
           }
         }

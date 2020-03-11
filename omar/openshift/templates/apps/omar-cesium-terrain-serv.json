@@ -188,6 +188,11 @@
                 ]
               }
             ],
+            "imagePullSecrets": [
+              {
+                "name": "${IMAGE_PULL_SECRET}"
+              }
+            ],
             "dnsPolicy": "ClusterFirst",
             "restartPolicy": "Always",
             "securityContext": {},
