@@ -11,7 +11,7 @@
       "description": "",
       "displayName": "",
       "name": "DOCKER_IMAGE_REPO",
-      "value": "quay.io/radiantsolutions"
+      "value": "nexus-docker-private-group.ossim.io"
     },
     {
       "description": "",
@@ -51,6 +51,13 @@
       "name": "IMAGE_NAME",
       "displayName": "IMAGE_NAME",
       "description": "The name of the docker image to pull",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "IMAGE_PULL_SECRET",
+      "displayName": "IMAGE_PULL_SECRET",
+      "description": "The name of the secret to use for pulling docker images from an external registry",
       "required": true,
       "value": ""
     },
@@ -179,6 +186,11 @@
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log"
+              }
+            ],
+            "imagePullSecrets": [
+              {
+                "name": "${IMAGE_PULL_SECRET}"
               }
             ],
             "dnsPolicy": "ClusterFirst",

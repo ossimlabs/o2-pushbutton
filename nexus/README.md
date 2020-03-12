@@ -11,7 +11,7 @@ Therefore, once nexus.repo is used, the other files in `/etc/yum.repos.d/` can s
 
 # Responsibilities
 
-Nexus is the de facto location for O2 project dependency related artifacts except docker images, which are stored in Quay. 
+Nexus is the de facto location for O2 project dependency related artifacts including docker images. 
 Specifically, Nexus serves as the maven repository (used by Gradle) and Yum repository.
  
 

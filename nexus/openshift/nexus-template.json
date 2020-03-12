@@ -260,6 +260,11 @@
                 ]
               }
             ],
+            "imagePullSecrets": [
+              {
+                "name": "${IMAGE_PULL_SECRET}"
+              }
+            ],
             "dnsPolicy": "ClusterFirst",
             "restartPolicy": "Always",
             "volumes": [
@@ -417,7 +422,7 @@
       "description": "The EBS volume ID",
       "displayName": "EBS Volume ID",
       "name": "EBS_VOLUME_ID",
-      "required": true,
+      "required": true
     },
     {
       "description": "The OpenShift Namespace where the Nexus ImageStream resides.",
@@ -429,7 +434,7 @@
       "description": "The Docker Registry the ImageStream will pull from.",
       "displayName": "Nexus ImageStream Namespace",
       "name": "DOCKER_REGISTRY",
-      "value": "quay.io/radiantsolutions"
+      "value": "nexus-docker-private-group.ossim.io"
     },
     {
       "description": "The Route that will redirect to Nexus",
@@ -454,6 +459,13 @@
       "displayName": "Nexus Image Name",
       "name": "NEXUS_IMAGE_NAME",
       "value": "nexus3"
+    },
+    {
+      "name": "IMAGE_PULL_SECRET",
+      "displayName": "IMAGE_PULL_SECRET",
+      "description": "The name of the secret to use for pulling docker images from an external registry",
+      "required": true,
+      "value": ""
     },
     {
       "description": "Tag of the Image to be used for the Nexus image.",
