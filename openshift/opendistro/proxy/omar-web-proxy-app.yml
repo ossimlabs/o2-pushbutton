@@ -31,7 +31,7 @@ spec:
         deploymentconfig: omar-web-proxy-app
     spec:
       containers:
-      - image: nexus-docker-public-hosted.ossim.io/omar-web-proxy-app:latest
+      - image: nexus-docker-private-group.ossim.io/omar-web-proxy-app:latest
         imagePullPolicy: Always
         name: omar-web-proxy-app
         ports:
@@ -48,6 +48,8 @@ spec:
         - mountPath: /etc/httpd/conf.d
           name: volume-gqbjf
       dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry-creds
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

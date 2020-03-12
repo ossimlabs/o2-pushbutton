@@ -21,6 +21,13 @@
             "description": "Persistent volume storage base name",
             "required": true,
             "value": "ossim-data"
+          },
+          {
+            "name": "IMAGE_PULL_SECRET",
+            "displayName": "IMAGE_PULL_SECRET",
+            "description": "The name of the secret to use for pulling docker images from an external registry",
+            "required": true,
+            "value": ""
           }
     ],
     "objects": [
@@ -234,7 +241,7 @@
                                         "value": "yes"
                                     }
                                 ],
-                                "image": "nexus-docker-public-hosted.ossim.io/zookeeper",
+                                "image": "nexus-docker-private-group.ossim.io/zookeeper",
                                 "imagePullPolicy": "Always",
                                 "name": "zookeeper",
                                 "ports": [
@@ -259,6 +266,11 @@
                                 "terminationMessagePath": "/dev/termination-log",
                                 "terminationMessagePolicy": "File"
                             }
+                        ],
+                        "imagePullSecrets": [
+                          {
+                            "name": "${IMAGE_PULL_SECRET}"
+                          }
                         ],
                         "dnsPolicy": "ClusterFirst",
                         "restartPolicy": "Always",
