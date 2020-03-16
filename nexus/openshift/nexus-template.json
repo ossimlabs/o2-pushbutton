@@ -434,7 +434,7 @@
       "description": "The Docker Registry the ImageStream will pull from.",
       "displayName": "Nexus ImageStream Namespace",
       "name": "DOCKER_REGISTRY",
-      "value": "docker.io/sonatype"
+      "value": "sonatype"
     },
     {
       "description": "The Route that will redirect to Nexus",
