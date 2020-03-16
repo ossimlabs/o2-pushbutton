@@ -48,10 +48,10 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}-docker-public-group"
+        "name": "${NEXUS_DOCKER_PUBLIC_GROUP_ROUTE}"
       },
       "spec": {
-        "host": "${NEXUS_SERVICE_NAME}-docker-public-group.ossim.io",
+        "host": "${NEXUS_DOCKER_PUBLIC_GROUP_ROUTE}",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
@@ -73,10 +73,10 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}-docker-public-hosted"
+        "name": "${NEXUS_DOCKER_PUBLIC_HOSTED_ROUTE}"
       },
       "spec": {
-        "host": "${NEXUS_SERVICE_NAME}-docker-public-hosted.ossim.io",
+        "host": "${NEXUS_DOCKER_PUBLIC_HOSTED_ROUTE}",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
@@ -98,10 +98,10 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}-docker-private-group"
+        "name": "${NEXUS_DOCKER_PRIVATE_GROUP_ROUTE}"
       },
       "spec": {
-        "host": "${NEXUS_SERVICE_NAME}-docker-private-group.ossim.io",
+        "host": "${NEXUS_DOCKER_PRIVATE_GROUP_ROUTE}",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
@@ -123,10 +123,10 @@
           "haproxy.router.openshift.io/timeout": "4m",
           "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
         },
-        "name": "${NEXUS_SERVICE_NAME}-docker-private-hosted"
+        "name": "${NEXUS_DOCKER_PRIVATE_HOSTED_ROUTE}"
       },
       "spec": {
-        "host": "${NEXUS_SERVICE_NAME}-docker-private-hosted.ossim.io",
+        "host": "${NEXUS_DOCKER_PRIVATE_HOSTED_ROUTE}",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
@@ -434,7 +434,7 @@
       "description": "The Docker Registry the ImageStream will pull from.",
       "displayName": "Nexus ImageStream Namespace",
       "name": "DOCKER_REGISTRY",
-      "value": "nexus-docker-private-group.ossim.io"
+      "value": "docker.io/sonatype"
     },
     {
       "description": "The Route that will redirect to Nexus",
@@ -443,16 +443,28 @@
       "value": "nexus.ossim.io"
     },
     {
-      "description": "The Route that will redirect to the docker repo of Nexus",
-      "displayName": "Nexus Docker Route",
-      "name": "NEXUS_DOCKER_ROUTE",
-      "value": "nexus-docker.ossim.io"
+      "description": "The route that will redirect to the public group docker repo of Nexus",
+      "displayName": "Nexus Docker Public Group Route",
+      "name": "NEXUS_DOCKER_PUBLIC_GROUP_ROUTE",
+      "value": "nexus-docker-public-group.ossim.io"
     },
     {
-      "description": "The route that will redirect to the public docker repo of Nexus",
-      "displayName": "Nexus Docker Public Route",
-      "name": "NEXUS_DOCKER_PUBLIC_ROUTE",
-      "value": "nexus-docker-public.ossim.io"
+      "description": "The route that will redirect to the public hosted docker repo of Nexus",
+      "displayName": "Nexus Docker Public Hosted Route",
+      "name": "NEXUS_DOCKER_PUBLIC_HOSTED_ROUTE",
+      "value": "nexus-docker-public-hosted.ossim.io"
+    },
+    {
+      "description": "The route that will redirect to the private group docker repo of Nexus",
+      "displayName": "Nexus Docker Private Group Route",
+      "name": "NEXUS_DOCKER_PRIVATE_GROUP_ROUTE",
+      "value": "nexus-docker-private-group.ossim.io"
+    },
+    {
+      "description": "The route that will redirect to the private hosted docker repo of Nexus",
+      "displayName": "Nexus Docker Private Hosted Route",
+      "name": "NEXUS_DOCKER_PRIVATE_HOSTED_ROUTE",
+      "value": "nexus-docker-private-hosted.ossim.io"
     },
     {
       "description": "Name of the Image to be used for the container.",
