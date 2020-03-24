@@ -483,7 +483,7 @@
       "description": "Tag of the Image to be used for the Nexus image.",
       "displayName": "Nexus Image Tag",
       "name": "NEXUS_IMAGE_TAG",
-      "value": "latest"
+      "value": "3.21.2"
     }
   ]
 }
