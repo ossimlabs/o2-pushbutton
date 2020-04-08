@@ -2,7 +2,7 @@ defaults:
   DEPLOYMENT_TARGET: test
   DOMAIN_NAME: <your-domain-here>
   NFS_SERVER_URL: <your-nfs-server-here>
-  DOCKER_REGISTRY_URL: <openshift-docker-registry-endpoint>
+  DOCKER_REGISTRY_PUBLIC_UPLOAD_URL: <openshift-docker-registry-endpoint>
   INSECURE_REPOSITORY: false
   TAG: <which-image-tags-to-pull>
   REPLICAS: <number-of-default-replicas> # This can be overwritten by redefining this under an individual application definition
