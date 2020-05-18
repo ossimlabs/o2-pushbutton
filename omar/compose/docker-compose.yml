@@ -209,6 +209,14 @@ services:
     networks:
       - proxynet
       - omarnet
+      
+  gmt-offset-service:
+    image: ${DOCKER_URL}/gmt-offset-service:${GMT_OFFSET_SERVICE_VERSION}
+    env_file:
+      - envs/gmt-offset-service.env
+    networks:
+      - proxynet
+      - omarnet
 
 networks:
   proxynet:
